@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {View, Text, Image, ActivityIndicator} from 'react-native';
-
+import AnimatedBar from '../components/AnimatedBar';
 import {useAsyncStorage} from "../hooks/useAsyncStorage";
 
 const DetailsView = ({route}) => {
@@ -8,17 +8,20 @@ const DetailsView = ({route}) => {
   const [detailsSource, setDetailsSource] = useAsyncStorage(
     `@pokeDex_details_${name}`,);
   if(!detailsSource) return <ActivityIndicator/>;
+  let imgSrc = detailsSource.sprites.front_default;
   return (
     <View style={styles.container}>
       <Image 
       style={styles.image}
       source={{
-        uri: detailsSource.sprites.back_default,
+        uri: imgSrc,
       }}/>
       <Text>{name}</Text>
-      {detailsSource.stats.map(item => (
-        <View>
-          <Text>{`${item.stat.name}: ${item.base_stat}`}</Text>
+      {detailsSource.stats.map((item, i) => (
+        <View key={i} style={styles.statsContainer}>
+          <Text style={styles.statsText}>{`${item.stat.name}: ${item.base_stat}`}</Text>
+          <View style={[styles.bar, {width: item.base_stat}]}></View>
+          <AnimatedBar value={item.base_stat} index={i}/>
         </View>
       ))}
     </View>
@@ -31,10 +34,21 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
-
   },
   image: {
-    width: 100,
+    height: 150,
+    width: 150,
+  },
+  statsContainer: {
+     flexDirection: 'row',
+     alignItems: 'center',
+  },
+  statsText: {
+    marginRight: 4,
+  },
+  bar: {
+    height: 8,
+    backgroundColor: `#516AAC`,
   }
 }
 

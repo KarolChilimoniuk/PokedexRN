@@ -33,7 +33,7 @@ function App() {
          },
        })}
        tabBarOptions = {{
-         activeTintColor: 'tomato',
+         activeTintColor: 'black',
          inactiveTintColor: 'gray'
        }}
       >

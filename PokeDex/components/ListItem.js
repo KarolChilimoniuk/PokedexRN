@@ -7,6 +7,7 @@ import {
   Image,
   Alert,
   ActivityIndicator,
+  View
 } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
@@ -52,16 +53,16 @@ export const ListItem = props => {
     }
 
     return (
-      <>
+      <View style={styles.pokemonContainer}>
         <Image
           source={{
             uri: details.sprites.front_default,
           }}
           style={styles.image}
         />
-        <Text style={styles.text}>{props.name}</Text>
-        <Text>ID: {details.id}</Text>
-      </>
+        <Text style={styles.text}>{props.name.toUpperCase()}</Text>
+        <Text style={styles.textId}>ID: {details.id}</Text>
+      </View>
     );
   };
 
@@ -87,15 +88,30 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: '100',
+    fontSize: 20,
+    marginRight: 20,
+  },
+  textId: {
+    fontSize: 20,
   },
   itemContainer: {
     padding: 8,
+
   },
   disableItemContainer: {
     backgroundColor: '#eee',
   },
   image: {
-    width: 50,
-    height: 50,
+    width: 70,
+    height: 70,
+    marginRight: 20,
   },
+  pokemonContainer: {
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#DFDFDF',
+    flexDirection: 'row',
+    minWidth: 310,
+    width: "100%",
+  }
 });

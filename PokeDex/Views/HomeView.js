@@ -6,6 +6,8 @@ import {
   Platform,
   FlatList,
   ActivityIndicator,
+  Text,
+  View,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -67,8 +69,11 @@ const HomeView = ({navigation}) => {
 
   return (
     <>
-      <StatusBar barStyle={barStyle} backgroundColor="black" />
+      <StatusBar barStyle={barStyle} backgroundColor='rgba(85, 158, 223, 0.7)'/>
       <SafeAreaView style={styles.appContainer}>
+        <View style={styles.headerContainer}>
+          <Text style={styles.listHeader}>pokemons</Text>
+        </View>
         {isLoading ? (
           <ActivityIndicator />
         ) : (
@@ -91,6 +96,7 @@ const HomeView = ({navigation}) => {
                 />
               );
             }}
+            style={styles.pokemonList}
           />
         )}
       </SafeAreaView>
@@ -100,13 +106,11 @@ const HomeView = ({navigation}) => {
 
 const styles = StyleSheet.create({
   appContainer: {
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(85, 158, 223, 0.7)',
     flex: 1,
   },
   container: {
     backgroundColor: '#eee',
-    justifyContent: 'center',
-    alignItems: 'center',
     flex: 1,
   },
   text: {
@@ -119,6 +123,24 @@ const styles = StyleSheet.create({
   disableItemContainer: {
     backgroundColor: '#eee',
   },
+  headerContainer: {
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    height: 60,
+  },
+  listHeader: {
+    fontSize: 40,
+    color: 'white',
+    textTransform: 'capitalize',
+  },
+  pokemonList: {
+    backgroundColor: 'white',
+    borderTopLeftRadius: 48,
+    borderTopRightRadius: 48,
+    padding: 40,
+    width: '100%',
+  }
 });
 
 export default HomeView;
