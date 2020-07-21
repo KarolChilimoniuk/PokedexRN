@@ -130,8 +130,8 @@ const styles = StyleSheet.create({
     height: 60,
   },
   listHeader: {
+    color: '#4F4F4F',
     fontSize: 40,
-    color: 'white',
     textTransform: 'capitalize',
   },
   pokemonList: {

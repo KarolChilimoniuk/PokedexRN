@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import getType from '../Views/pokeType';
 
 import {
   TouchableOpacity,
@@ -42,7 +43,6 @@ export const ListItem = props => {
 
       return () => controller.abort();
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [detailsSource]);
 
   const isActive = !isLoading && details != null;
@@ -60,8 +60,16 @@ export const ListItem = props => {
           }}
           style={styles.image}
         />
-        <Text style={styles.text}>{props.name.toUpperCase()}</Text>
-        <Text style={styles.textId}>ID: {details.id}</Text>
+        <View>
+        <Text style={styles.text}>{details.name}</Text>
+        <Text style={styles.textId}>#{details.id}</Text>
+        </View>
+        {/* <Image
+          source={{
+            uri: getType(details.types[0].type.name),
+          }}
+          style={styles.image}
+        /> */}
       </View>
     );
   };
@@ -86,13 +94,16 @@ export const ListItem = props => {
 
 const styles = StyleSheet.create({
   text: {
+    color: '#4F4F4F',
     fontSize: 20,
     fontWeight: '100',
     fontSize: 20,
     marginRight: 20,
+    textTransform: 'capitalize',
   },
   textId: {
-    fontSize: 20,
+    color: '#A4A4A4',
+    fontSize: 15,
   },
   itemContainer: {
     padding: 8,
